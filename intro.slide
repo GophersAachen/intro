@@ -1,0 +1,314 @@
+Software-Entwicklung mit Go
+11 Nov 2018
+
+Alexander Neumann, Jean Kahrs
+https://github.com/GophersAachen/intro
+
+: Begrüßung
+: Fragen: Wer nutzt schon Go, wer programmiert was anderes? Java/Python/Ruby/C++/C#
+
+* Ablauf
+
+- Einführung in Go
+- Umgang mit der Umgebung
+- Programmieraufgaben
+
+: Zwei Beispielprogramme
+: Danach: Aufgaben, selber Programmieren
+: Wir machen das zum ersten Mal, bitte hinterher Feedback abgeben!
+: Es kann sein, dass wir was vergessen haben
+: Fragen bitte einfach direkt stellen
+: Hinweis: GitHub Repo
+
+* Ziele von GO
+
+- Effizienz von statischer Typisierung, aber Bequemlichkeit einer dynamischen Sprache
+- Entwicklung "at scale" möglich machen
+- Safety: type-safe, memory-safe
+- Effiziente, latenzfreie Garbage-Collection
+- Schnelles Kompilieren
+- Gute Unterstützung von Nebenläufigkeit und Kommunikation
+
+* Philosophie von Go
+
+- Konvention vor Konfiguration
+- Wenige orthogonale Features (der Sprache), wenige Keywords
+- Lesbarkeit viel wichtiger als Kürze
+- Keine Typenhierarchie, keine Vererbung
+- Explizite Fehlerbehandlung, keine Exceptions
+- Konvertierung immer explizit (`uint64(foo)`)
+- Kein dynamisches Linken, statische Binaries
+- Testen sehr gut integriert
+
+: Exportieren über Großbuchstaben
+: gofmt
+: Fühlt sich an wie Python, aber kompiliert
+: Code wird öfter gelesen als geschrieben
+
+* Design von Go
+
+- Statische typisiert, aber erlaubt Inspektion zur Laufzeit
+- Alle Imports/Variablen müssen benutzt werden
+- Explizite Dependencies
+- Basis-Datentypen (`int`, `bool`, `string`, `uint64`, ...)
+- Komplexe Typen: Structs, Slices, Arrays, Maps, Channel
+- Nebenläufigkeit mit Co/Goroutinen
+- Komposition (duck-typing)
+- Interfaces implizit
+- Keine Makefiles, Code enthält Information zum Kompilieren
+- Einfaches Kompilieren für andere Architekturen
+
+: reflection, interfaces
+: -Werror immer an
+
+* Achtung
+
+Die Sprache heißt "Go"
+
+Aber: suchen nach "golang", nicht "go"
+
+.image https://raw.githubusercontent.com/shalakhin/gophericons/master/png/8.png _ 400
+.caption _gophericons_ by [[https://www.facebook.com/olga.shalakhina][Olga Shalakhina]] ([[http://creativecommons.org/licenses/by/3.0/][CC BY 3.0]])
+
+* Einführung Go
+
+* Tooling
+- Kompilieren: go build
+- Direkt ausführen: go run
+- Sourcecode formatieren: `gofmt`, `goimports`
+
+- go vet
+- golint
+- gorename
+- [...]
+
+* Runtime
+
+- Kümmert sich um alles
+- Stack
+- Goroutines, System-Threads
+- Kommunikation (Channel)
+- Eingebaute Datentypen (Slices, Maps)
+
+* Standardbibliothek
+
+- Enthält schon sehr viel
+- HTTP-Server, HTTP-Client
+- Crypto, Hashfunktionen
+- Testing-Framework
+- HTML, Templates
+- Go Parser
+- Math/bignum
+- RPC
+- zip/tar/gzip/zlib/...
+
+* Packages
+
+- Go-Code ist aufgeteilt in Pakete
+- Ein Paket ist ein Verzeichnis mit Code
+- Export durch Großbuchstaben
+- Explizite Dependencies
+
+.image https://raw.githubusercontent.com/shalakhin/gophericons/master/png/15.png 360 _
+
+* Basics
+
+- Ähnlich zu C, nur Typ/Name vertauscht
+- Nur noch ein Schleifenkonstrukt
+- Keine Pointer-Arithmetik
+- Alle Variablen/Pakete müssen verwendet werden (`-Werror`)
+- Coding-Style ist was `gofmt` ausgibt
+- `CamelCase` statt `snake_case` für Namen
+
+* Hello World!
+
+.play -edit intro-demos/hello-world/main.go
+
+Ausführen:
+
+  $ go run main.go
+  Hello World
+
+Kompilieren:
+
+  $ go build -o hello main.go
+  $ ./hello
+  Hello World
+
+* Klammern, if, for
+
+.play -edit intro-demos/if-for/main.go /^func main/,/^}/
+
+* Doppelzuweisung, Semikolons
+
+.play -edit intro-demos/semicolons-double-assign/main.go
+
+* Variablen und Konstanten
+
+.play -edit intro-demos/var-const/main.go /START OMIT/,/END OMIT/
+
+.play -edit intro-demos/unsized-constants/main.go /START OMIT/,/END OMIT/
+
+* Automatische Typableitung
+
+.play -edit intro-demos/var-declaration/main.go
+
+* Funktionen
+
+.play -edit intro-demos/funcs/main.go
+
+* main(), init()
+
+.play -edit intro-demos/main-init/main.go
+
+* Mehrfachrückgabe, Fehler
+
+.play -edit intro-demos/funcs2/main.go /START OMIT/,/END OMIT/
+
+* Type und Struct
+
+.play -edit intro-demos/type-struct1/main.go /START OMIT/,/END OMIT/
+
+* Methoden
+
+.play -edit intro-demos/methods/main.go /START OMIT/,/END OMIT/
+
+* Pointer
+
+.play -edit intro-demos/pointer/main.go /START OMIT/,/END OMIT/
+
+* godoc
+
+  $ godoc -http 127.0.0.1:6060
+
+[[http://localhost:6060/pkg][godoc Webserver]]
+[[http://localhost:6060/pkg/fmt/#Stringer][interface fmt.Stringer]]
+
+Alles auch unter [[https://godoc.org/pkg/fmt][https://godoc.org/pkg/fmt]] erreichbar
+
+Für andere Pakete: [[https://godoc.org/github.com/fatih/color][https://godoc.org/github.com/fatih/color]]
+
+* godoc #2
+
+  $ go doc fmt.println
+
+  func Println(a ...interface{}) (n int, err error)
+      Println formats using the default formats for its operands and writes to
+      standard output. Spaces are always added between operands and a newline is
+      appended. It returns the number of bytes written and any write error
+      encountered.
+
+* Interfaces
+
+  $ go doc fmt.stringer
+
+  type Stringer interface {
+          String() string
+  }
+      Stringer is implemented by any value that has a String method, which defines
+      the ``native'' format for that value. The String method is used to print
+      values passed as an operand to any format that accepts a string or to an
+      unformatted printer such as Print.
+
+
+* Interfaces #2
+
+.play -edit intro-demos/interfaces/main.go /START Color OMIT/,/END Color OMIT/
+
+.play -edit intro-demos/interfaces/main.go /START main OMIT/,/END main OMIT/
+
+* Closures
+
+.play -edit intro-demos/closures/main.go /START OMIT/,/END OMIT/
+
+* Native Datenstrukturen
+
+- Array
+- Slice ("Arrays mit variabler Länge")
+- Maps ("Dictionary", "Hash")
+- Channel
+
+.image https://raw.githubusercontent.com/shalakhin/gophericons/master/png/11.png _ 300
+
+* Native Datenstrukturen: Array
+
+.play -edit intro-demos/arrays/main.go /START OMIT/,/END OMIT/
+
+Eher selten verwendet
+
+* Native Datenstrukturen: Slice
+
+.play -edit intro-demos/slices/main.go /START OMIT/,/END OMIT/
+
+Achtung: Call-by-reference (für unterliegende Daten)
+
+* Native Datenstrukturen: Map
+
+Aufgabe: Finde das am häufigsten verwendete Wort in Göthes "Faust"
+
+* Wörter zählen #1
+
+.play -edit intro-demos/maps/main.go /open OMIT/,/open OMIT/
+
+* Wörter zählen #2
+
+.play -edit intro-demos/maps/main.go /scan OMIT/,/scan OMIT/
+
+- [[https://godoc.org/bufio#Scanner][https://godoc.org/bufio#Scanner]]
+- [[https://godoc.org/bufio#NewScanner][https://godoc.org/bufio#NewScanner]]
+
+* Wörter zählen #3
+
+.play -edit intro-demos/maps/main.go /print OMIT/,/print OMIT/
+
+* Nebenläufigkeit in Go
+
+.play -edit intro-demos/concurrency/main.go /START OMIT/,/END OMIT/
+
+.image https://raw.githubusercontent.com/shalakhin/gophericons/master/png/2.png _ 300
+
+Wird eine Funktion mit dem Keyword `go` gestartet, läuft sie in einer eigenen Goroutine.
+
+* Native Datenstrukturen: Channel
+
+.play -edit intro-demos/channels/main.go /START OMIT/,/END OMIT/
+
+* Nebenläufigkeit #2
+
+.play -edit intro-demos/concurrency2/main.go /START OMIT/,/END OMIT/
+
+* Nebenläufigkeit #3
+
+.play -edit intro-demos/concurrency3/main.go /START main OMIT/,/END main OMIT/
+
+* Nebenläufigkeit #3
+
+.play -edit intro-demos/concurrency3/main.go /START worker OMIT/,/END worker OMIT/
+
+* Nebenläufigkeit #4
+
+.play -edit intro-demos/concurrency4/main.go /START main OMIT/,/END main OMIT/
+
+- [[https://godoc.org/pkg/context][https://godoc.org/pkg/context]]
+
+* Nebenläufigkeit #4
+
+.play -edit intro-demos/concurrency4/main.go /START worker OMIT/,/END worker OMIT/
+
+* Demo Libraries
+
+* Weiterführendes
+
+- Alan A. A. Donovan · Brian W. Kernighan - The Go Programming Language
+      http://www.gopl.io/
+- Brian Ketelsen, Erik St. Martin, William Kennedy - Go in Action
+      http://goinactionbook.com/
+
+- Caleb Doxsey - An Introduction to Programming in Go [free]
+      https://www.golang-book.com/books/intro
+      https://www.golang-book.com/public/pdf/gobook.0.pdf
+
+- An (interactive) Tour of Go: https://golang.org/tour
+
+
+#vim:ft=votl noet ts=4 nolist
