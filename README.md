@@ -10,7 +10,7 @@ Folien zum Ansehen: https://talks.godoc.org/github.com/GophersAachen/intro/intro
 
 Wir haben ein [Forum](https://gophers-aachen.de), dort könnt ihr in der
 [Kategorie "Hilfe"](https://gophers-aachen.de/c/hilfe) Fragen stellen. Wenn ihr
-uns Feedback zum Workshop selbst hinterlassen möchtet gibt einen [Pos zum
+uns Feedback zum Workshop selbst hinterlassen möchtet gibt einen [Post zum
 Workshop](https://gophers-aachen.de/t/einsteiger-workshop-software-entwicklung-mit-go/14).
 
 Änderungen an diesem Repository (Verbesserungen, Typos) bitte einfach per
