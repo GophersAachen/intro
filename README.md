@@ -1,7 +1,10 @@
 Workshop "Software-Entwicklung in Go"
+=====================================
+
+Der Workshop wurde erstmals gehalten am 07. November 2018 in Aachen.
 
 Material
-========
+--------
 
 Folien zum Ansehen: https://talks.godoc.org/github.com/GophersAachen/intro/intro.slide
 
@@ -14,7 +17,7 @@ Workshop](https://gophers-aachen.de/t/einsteiger-workshop-software-entwicklung-m
 Pull-Request einreichen.
 
 Weiterführende Links
-====================
+--------------------
 
  * Buch: [Go Bootcamp](http://www.golangbootcamp.com/book/frontmatter) (kostenlos online lesen)
  * Kursmaterial: [Go Crash Course](https://gitlab.com/phinicota/golang-crash-course)
