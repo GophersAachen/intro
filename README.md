@@ -1,12 +1,7 @@
 Workshop "Software-Entwicklung in Go"
 =====================================
 
-Der Workshop wurde erstmals gehalten am 07. November 2018 in Aachen.
-
-Material
---------
-
-Folien zum Ansehen: https://talks.godoc.org/github.com/GophersAachen/intro/intro.slide
+Der Workshop wurde erstmals am 07. November 2018 in Aachen veranstaltet.
 
 Wir haben ein [Forum](https://gophers-aachen.de), dort könnt ihr in der
 [Kategorie "Hilfe"](https://gophers-aachen.de/c/hilfe) Fragen stellen. Wenn ihr
@@ -15,6 +10,11 @@ Workshop](https://gophers-aachen.de/t/einsteiger-workshop-software-entwicklung-m
 
 Änderungen an diesem Repository (Verbesserungen, Typos) bitte einfach per
 Pull-Request einreichen.
+
+Material
+--------
+
+Folien des Einsteigerworkshops zum Ansehen: https://talks.godoc.org/github.com/GophersAachen/intro/intro.slide
 
 Weiterführende Links
 --------------------
