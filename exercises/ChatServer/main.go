@@ -36,7 +36,7 @@ func main() {
 	}
 
 	mux := http.NewServeMux()
-	mux.Handle("/api", s)
+	mux.Handle("/api/", s)
 	mux.Handle("/", http.FileServer(http.Dir("static")))
 
 	http.ListenAndServe("127.0.0.1:3000", mux)
